@@ -18,7 +18,7 @@ const PhotosList: React.FC<PhotosListProps> = ({ userId }) => {
     <>
       <StyledPhotosList>
         {photosUrls.map((url, index) => (
-          <PhotoItem key={index} />
+          <PhotoItem key={index} url={url} />
         ))}
       </StyledPhotosList>
     </>
