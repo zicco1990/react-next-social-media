@@ -6,9 +6,11 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../Redux/reducers";
 
-const FriendFriends: React.FC = () => {
-  const router = useRouter();
-  const userId = Number(router.query.id);
+interface IFriendFriendsProps {
+  userId: number;
+}
+
+const FriendFriends: React.FC<IFriendFriendsProps> = ({ userId }) => {
   const userName = useSelector((state: RootState) => state.users[userId].name);
 
   return (
@@ -23,3 +25,13 @@ const FriendFriends: React.FC = () => {
 export default FriendFriends;
 
 const FriendsTitle = styled.h1``;
+
+export function getServerSideProps(context) {
+  const userId = Number(context.params.id);
+
+  return {
+    props: {
+      userId,
+    }, // will be passed to the page component as props
+  };
+}

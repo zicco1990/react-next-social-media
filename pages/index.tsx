@@ -8,6 +8,7 @@ import { RootState } from "../Redux/reducers";
 
 export default function Home() {
   const user = useSelector((state: RootState) => state.users[0]);
+
   const friendsList = useSelector((state: RootState) => {
     return user.friends.map((friend) => ({
       name: state.users[friend].name,
@@ -15,6 +16,7 @@ export default function Home() {
       photoUrl: state.users[friend].photoUrl,
     }));
   });
+
   return (
     <MainLayout title="Social-Media | Main">
       <Container>
