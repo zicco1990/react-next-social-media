@@ -6,12 +6,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/reducers";
 import { useRouter } from "next/dist/client/router";
 
-export default function Home() {
-  const router = useRouter();
+interface IFriendProps {
+  userId: number;
+}
 
-  const user = useSelector(
-    (state: RootState) => state.users[Number(router.query.id)]
-  );
+const Friend: React.FC<IFriendProps> = ({ userId }) => {
+  const user = useSelector((state: RootState) => state.users[userId]);
 
   const friendsList = useSelector((state: RootState) => {
     return user.friends.map((friend) => ({
@@ -65,7 +65,9 @@ export default function Home() {
       </Container>
     </MainLayout>
   );
-}
+};
+
+export default Friend;
 
 //Layout styles
 const Container = styled.div`
@@ -141,3 +143,13 @@ const InfoBar = styled.div`
   border-bottom: 1px solid #9d9d9d73;
   padding: 1rem 0;
 `;
+
+export function getServerSideProps(context) {
+  const userId = Number(context.params.id);
+
+  return {
+    props: {
+      userId,
+    }, // will be passed to the page component as props
+  };
+}
