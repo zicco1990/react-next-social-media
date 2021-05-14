@@ -3,8 +3,10 @@ import DeleteFriendModal from "../../../components/friends/DeleteFriendModal";
 import FriendList from "../../../components/friends/FriendsList";
 import MainLayout from "../../../components/layouts/MainLayout";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../../Redux/reducers";
+import { useEffect } from "react";
+import { closePageLoaderAction } from "../../../Redux/reducers/pageLoaderReducer";
 
 interface IFriendFriendsProps {
   userId: number;
@@ -12,6 +14,11 @@ interface IFriendFriendsProps {
 
 const FriendFriends: React.FC<IFriendFriendsProps> = ({ userId }) => {
   const userName = useSelector((state: RootState) => state.users[userId].name);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(closePageLoaderAction());
+  }, []);
 
   return (
     <MainLayout title="Social-Media | Friends">

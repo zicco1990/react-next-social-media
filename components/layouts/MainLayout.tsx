@@ -5,6 +5,7 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 import { useSelector } from "react-redux";
 import { RootState } from "../../Redux/reducers";
+import PageLoader from "./PageLoader";
 
 export interface MainLayoutProps {
   title: string;
@@ -12,7 +13,7 @@ export interface MainLayoutProps {
 
 const MainLayout: React.FC<MainLayoutProps> = ({ title, children }) => {
   const isDarkTheme = useSelector((state: RootState) => state.theme);
-
+  const isPageLoader = useSelector((state: RootState) => state.pageLoader);
   return (
     <>
       <Head>
@@ -35,6 +36,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ title, children }) => {
             <Nav />
           </aside>
           <main className={styles.main}>{children}</main>
+          {isPageLoader && <PageLoader />}
         </div>
 
         <Footer></Footer>

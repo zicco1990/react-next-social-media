@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../Redux/reducers";
 import ChatModal from "../components/chats/ChatModal";
 import { addNewChat, openChatModal } from "../Redux/reducers/chatsReducer";
+import { closePageLoaderAction } from "../Redux/reducers/pageLoaderReducer";
 
 export interface MessagesProps {}
 const Messages: React.FC<MessagesProps> = () => {
@@ -15,6 +16,8 @@ const Messages: React.FC<MessagesProps> = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(closePageLoaderAction());
+
     if (router.query.id) {
       const idNum = Number(router.query.id);
       if (!chats.some((elem) => elem.id === idNum)) {

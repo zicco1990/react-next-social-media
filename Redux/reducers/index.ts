@@ -5,6 +5,7 @@ import { chatModalReducer, chatsReducer } from "./chatsReducer";
 import { navReducer } from "./navReducer";
 import { themeReducer } from "./themeReducer";
 import { usersReducer } from "./usersReducser";
+import { pageLoaderReducer } from "./pageLoaderReducer";
 
 const rootReducer = combineReducers({
   nav: navReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   chats: chatsReducer,
   chatModal: chatModalReducer,
   deleteFriendModal: deleteFriendModalReducer,
+  pageLoader: pageLoaderReducer,
 });
 
 export const reducer = (state, action) => {

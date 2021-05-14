@@ -2,9 +2,11 @@ import MainLayout from "../../components/layouts/MainLayout";
 import styled from "styled-components";
 import Link from "next/link";
 import { Avatar, Typography } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Redux/reducers";
 import { useRouter } from "next/dist/client/router";
+import { useEffect } from "react";
+import { closePageLoaderAction } from "../../Redux/reducers/pageLoaderReducer";
 
 interface IFriendProps {
   userId: number;
@@ -20,6 +22,12 @@ const Friend: React.FC<IFriendProps> = ({ userId }) => {
       photoUrl: state.users[friend].photoUrl,
     }));
   });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(closePageLoaderAction());
+  }, []);
+
   return (
     <MainLayout title="Social-Media | Main">
       <Container>
